@@ -90,6 +90,24 @@
   }
   setDarkMode(mode === "true");
 
+
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   // 恢复上次颜色
+  //   restoreMainColor();
+  // });
+
+  // document
+  //   .querySelectorAll(".main-nav-link").forEach((el) => {
+  //     el.addEventListener("click", e => {
+  //       const color = el.getAttribute('data-main-color');
+  //       applyMainColor(color);
+  //       hexo.log.info("页面生成调试信息");
+  //     });
+  //   });
+  
+  // // default main color
+  // document.documentElement.setAttribute('data-main-color', 'red');
+
   document
     .querySelector(".dark-mode-btn")
     .addEventListener("click", function () {
@@ -129,3 +147,19 @@
     });
   }
 })();
+
+
+function applyMainColor(val) {
+  const root = document.documentElement;
+  if (val) {
+    localStorage.setItem('main-color', val);
+  } else {
+    localStorage.removeItem('main-color');
+  }
+}
+
+// 页面加载时恢复颜色
+function restoreMainColor() {
+  const val = localStorage.getItem('main-color');
+  if (val) document.documentElement.setAttribute('data-main-color', val);
+}

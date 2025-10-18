@@ -14,6 +14,7 @@
   
   
   <title>
+    vim笔记 |
     
     Hole
   </title>
@@ -32,11 +33,15 @@
 
   
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hole">
-<meta property="og:url" content="http://example.com/index.html">
+    <meta name="description" content="vim笔记一般指令模式 &lt;Ctrl&gt; + f：向下移动一页 &lt;Ctrl&gt; + b：向上移动一页 [n]&lt;space&gt;：光标移动n个字符 0：移动到这一列开头 $：移动到这一列最后一个字符 G：移动到文件最后一列 [n]G：移动到文件的第n列 gg：移动到文件的第一列，相当于1G [n]&lt;Enter&gt;：光标向下移动n列 &#x2F;[word]：向下搜">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim笔记">
+<meta property="og:url" content="http://example.com/2025/10/18/vim%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hole">
+<meta property="og:description" content="vim笔记一般指令模式 &lt;Ctrl&gt; + f：向下移动一页 &lt;Ctrl&gt; + b：向上移动一页 [n]&lt;space&gt;：光标移动n个字符 0：移动到这一列开头 $：移动到这一列最后一个字符 G：移动到文件最后一列 [n]G：移动到文件的第n列 gg：移动到文件的第一列，相当于1G [n]&lt;Enter&gt;：光标向下移动n列 &#x2F;[word]：向下搜">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-18T13:10:27.000Z">
+<meta property="article:modified_time" content="2025-10-18T13:25:50.965Z">
 <meta property="article:author" content="PPK">
 <meta name="twitter:card" content="summary">
   
@@ -151,9 +156,7 @@
 </div>
 <header id="header">
   
-    
-      <img fetchpriority="high" src="/images/megumin.png" alt="">
-    
+    <img fetchpriority="high" src="/images/koishi-1.png" alt="vim笔记">
   
   <div id="header-outer">
     <div id="header-title">
@@ -161,7 +164,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">Hole</h1>
+            <h1 data-aos="slide-up">vim笔记</h1>
           </a>
         
       
@@ -177,176 +180,170 @@
 
         <div id="content">
           
-          <section id="main">
-  
-  
-  <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/" aria-label="中断与异常"></a>
-    
-    
-    <div class="post-cover-left">
+          <section id="main"><article id="post-vim笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/10/18/vim%E7%AC%94%E8%AE%B0/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-10-18T13:10:27.000Z" itemprop="datePublished">2025-10-18</time>
+    <time style="display: none;" id="post-update-time">2025-10-18</time>
+  </a>
+</div>
+
       
-        <img data-src="/images/nanami-1.jpg" data-sizes="auto" alt="中断与异常" class="lazyload">
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="vim笔记"><a href="#vim笔记" class="headerlink" title="vim笔记"></a>vim笔记</h1><h3 id="一般指令模式"><a href="#一般指令模式" class="headerlink" title="一般指令模式"></a>一般指令模式</h3><ul>
+<li>&lt;Ctrl&gt; + f：向下移动一页</li>
+<li>&lt;Ctrl&gt; + b：向上移动一页</li>
+<li>[n]&lt;space&gt;：光标移动n个字符</li>
+<li>0：移动到这一列开头</li>
+<li>$：移动到这一列最后一个字符</li>
+<li>G：移动到文件最后一列</li>
+<li>[n]G：移动到文件的第n列</li>
+<li>gg：移动到文件的第一列，相当于1G</li>
+<li>[n]&lt;Enter&gt;：光标向下移动n列</li>
+<li>&#x2F;[word]：向<strong>下</strong>搜索第一个word的字串，按n继续搜索，按N反向搜索</li>
+<li>?[word]：向<strong>上</strong>搜索第一个word的字串，按n继续搜索，按N反向搜索</li>
+<li>:[n1],[n2]s&#x2F;[word1]&#x2F;[word2]&#x2F;gc：在n1行与n2行之间寻找word1这个字串并用word2替换</li>
+<li>x，X：x为向后删除一个字符，X为向前删除一个字符</li>
+<li>[n]x：向后连续删除n个字符</li>
+<li>dd：删除光标缩在的一行</li>
+<li>[n]dd：删除光标所在的向下n行</li>
+<li>d1G：删除光标所在行到第一行的所有数据</li>
+<li>dG：删除光标所在行到最后一行的所有数据</li>
+<li>d0：删除光标所在的字符到行首的所有数据</li>
+<li>d$：删除光标所在的字符到行尾的所有数据</li>
+<li>yy：复制光标所在的那一行</li>
+<li>[n]yy：复制光标缩在的向下n行</li>
+<li>y1G：复制光标所在的行到第一行的所有事护具</li>
+<li>yG：复制光标所在的行到最后一行的所有数据</li>
+<li>y0：复制光标所在的那个字符到行首的所有数据</li>
+<li>y$：复制光标所在的那个字符到行尾的所有数据</li>
+<li>p，P：p为将已复制的数据粘贴在光标的下一行上，P为将已复制的数据粘贴在光标的上一行上。</li>
+<li>J：将光标所在行与下一行合并</li>
+<li>u：撤销上一个动作</li>
+<li>&lt;Ctrl&gt; + r：重做上一个撤销</li>
+<li>. ：重复上一个动作</li>
+</ul>
+<h3 id="编辑模式"><a href="#编辑模式" class="headerlink" title="编辑模式"></a>编辑模式</h3><p>进入编辑模式的指令：i，I，a，A，o，O，r，R，一般用i即可。注意，r和R会进入取代模式，r只会取代所在那个字符一次，R会一直取代光标所在的文字。</p>
+<p>按下&lt;Esc&gt;退出编辑模式，返回一般指令模式</p>
+<h3 id="指令列命令模式"><a href="#指令列命令模式" class="headerlink" title="指令列命令模式"></a>指令列命令模式</h3><ul>
+<li><p>:wq!：w为保存，q为退出，!表示强制</p>
+</li>
+<li><p>:w [filename]：另存为filename文件</p>
+</li>
+<li><p>:r [filename]：将filename的内容加到当前光标的后面</p>
+</li>
+<li><p>:[n1],[n2] w [filename]：将n1到n2行的内容存储为filename文件</p>
+</li>
+<li><p>:! [command]：暂时离开vim并执行命令command</p>
+</li>
+<li><p>:set nu：显示行号</p>
+</li>
+<li><p>:set nonu：取消显示行号</p>
+</li>
+</ul>
+<h3 id="vim的额外功能"><a href="#vim的额外功能" class="headerlink" title="vim的额外功能"></a>vim的额外功能</h3><p><strong>多文件编辑</strong></p>
+<p>同时打开多个文件：<code>vim test1.txt vim test2.txt</code></p>
+<ul>
+<li>:n：编辑下一个文件</li>
+<li>:N：编辑上一个文件</li>
+<li>:files：列出目前vim打开的所有文件</li>
+</ul>
+<p><strong>多窗口功能</strong></p>
+<ul>
+<li>:sp [filename]：在新窗口打开filename，如果没有指定filename，则会默认打开当前编辑的文件</li>
+<li>&lt;Ctrl&gt; + w + &lt;↓ or j&gt;：光标移动到下方窗口</li>
+<li>&lt;Ctrl&gt; + w + &lt;↑ or k&gt;：光标移动到上方窗口</li>
+</ul>
+<p><strong>关键词补全功能</strong></p>
+<ul>
+<li>&lt;Ctrl&gt; + x -&gt; &lt;Ctrl&gt; + n：根据当前文件的内容文字进行补全。</li>
+<li>&lt;Ctrl&gt; + x -&gt; &lt;Ctrl&gt; + o：根据当前文件的扩展名，以vim内置的关键字进行语法补全。</li>
+</ul>
+<p>~&#x2F;.vimrc：该文件可以在每次打开vim时预先启动一些设置。</p>
+
       
     </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-10-18</span>
-        <span><span class="icon-pencil"></span>1.4k words</span>
-        <span><span class="icon-clock"></span>5 mins</span>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/images/nanami-1.jpg" data-sizes="auto" alt="中断与异常" class="lazyload">
+        
+        <a href="/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            中断与异常
+          
+        </h3>
       </div>
-      <h2 class="post-title">中断与异常</h2>
-      <article class="post-article">
-        
-          中断与异常概念梳理与分类日期: 2025.10.1
-简介中断(Interrupt)和异常(Exception)是计算机中常见的概念，用于使计算机暂停正在执行的程序去处理某些外设请求或借助内核态进行一些用户态无法执行的特权操作。网上对中断和异常的解释与分类五花八门，各有各的说法。在查阅了许多资料、阅读了官方文档后，我终于理清楚了中间的关系，也知道了为什么网上各种博客会有偏差的原因。关键是因为市面上两大主流的处理器：Intel和ARM的官方文档中对中断和异常的解释有所不同。
-Intel处理器&amp;emsp;&amp;emsp;在Intel CPU手册Volume 1的6.4节中给出如下说明：处理器提供了两种中
-        
-      </article>
-    </div>
-  </div>
-  </div>
-
-
-  
-  
-  <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-    <a class="post-link" href="/2025/10/18/vim%E7%AC%94%E8%AE%B0/" aria-label="vim笔记"></a>
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/images/koishi-1.png" data-sizes="auto" alt="vim笔记" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-10-18</span>
-        <span><span class="icon-pencil"></span>869 words</span>
-        <span><span class="icon-clock"></span>3 mins</span>
-      </div>
-      <h2 class="post-title">vim笔记</h2>
-      <article class="post-article">
-        
-          vim笔记一般指令模式
-&amp;lt;Ctrl&amp;gt; + f：向下移动一页
-&amp;lt;Ctrl&amp;gt; + b：向上移动一页
-[n]&amp;lt;space&amp;gt;：光标移动n个字符
-0：移动到这一列开头
-$：移动到这一列最后一个字符
-G：移动到文件最后一列
-[n]G：移动到文件的第n列
-gg：移动到文件的第一列，相当于1G
-[n]&amp;lt;Enter&amp;gt;：光标向下移动n列
-&amp;#x2F;[word]：向下搜索第一个word的字串，按n继续搜索，按N反向搜索
-?[word]：向上搜索第一个word的字串，按n继续搜索，按N反向搜索
-:[n1],[n2]s&amp;#x2F;[word1]&amp;#x2F;[word2]
-        
-      </article>
-    </div>
-  </div>
-  </div>
-
-
-  
-  
-  <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/10/18/gdb%E7%AC%94%E8%AE%B0/" aria-label="gdb笔记"></a>
     
     
-    <div class="post-cover-left">
+    <div class="article-nav-link-wrap article-nav-link-right">
       
         
         
           <img data-src="/images/megumin.png" data-sizes="auto" alt="gdb笔记" class="lazyload">
         
       
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-10-18</span>
-        <span><span class="icon-pencil"></span>732 words</span>
-        <span><span class="icon-clock"></span>2 mins</span>
-      </div>
-      <h2 class="post-title">gdb笔记</h2>
-      <article class="post-article">
+      <a href="/2025/10/18/gdb%E7%AC%94%E8%AE%B0/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
         
-          gdb笔记启动gdb
-编译带有调试信息的可执行文件，即在gcc的参数中加入-g参数：
-gcc -g -o main main.c
-
-启动gdb：
-gdb main
-
-
-设置断点并运行程序
-可以用list &amp;lt;line_no&amp;gt;来显示准备设置断点附近行的代码。
-list还可以用函数名做参数，从而显示指定函数附近的代码。
-
-braek &amp;lt;line_no&amp;gt;可以在指定行号设置断点。
-disable breakpoint &amp;lt;line_no&amp;gt;可以取消指定断点。
-
-run命令可以启动程序，启动的程序会在遇到断点或错误时暂停运行。
-
-
-控制命令
-逐过程调试：n(next)执行下
+          gdb笔记
         
-      </article>
+      </h3>
     </div>
-  </div>
-  </div>
-
-
-  
-  
-  <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
     
-    <a class="post-link" href="/2024/10/20/%E6%9C%AC%E5%9C%B0%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/" aria-label="本地智能合约部署测试"></a>
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/images/megumin.png" data-sizes="auto" alt="本地智能合约部署测试" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-10-20</span>
-        <span><span class="icon-pencil"></span>572 words</span>
-        <span><span class="icon-clock"></span>2 mins</span>
-      </div>
-      <h2 class="post-title">本地智能合约部署测试</h2>
-      <article class="post-article">
-        
-          使用Remix编译智能合约并用JS部署到Ganache并访问
-搭建环境安装npm和node，新建文件夹，在该目录下安装web3模块npm --registry http://registry.npm.taobao.org install web3然后输入npm init，并且一直按回车。注：web3版本过高可能导致后面部分函数报错，本次实验使用的web3版本为1.10.0
-
-Remix编译智能合约智能合约log_and_return.sol源码为
-12345678910111213141516171819202122232425262728293031323334353637383940414
-        
-      </article>
-    </div>
-  </div>
-  </div>
+  </nav>
 
 
   
+</article>
+
+
+
 
 
 
 </section>
           
             <aside id="sidebar">
-  <div class="sidebar-wrapper ">
+  <div class="sidebar-wrapper wrap-sticky">
     <div class="sidebar-wrap" data-aos="fade-up">
       
-        <div class="sidebar-author">
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#vim%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">vim笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E6%8C%87%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.0.1.</span> <span class="toc-text">一般指令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.0.2.</span> <span class="toc-text">编辑模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%88%97%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.0.3.</span> <span class="toc-text">指令列命令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim%E7%9A%84%E9%A2%9D%E5%A4%96%E5%8A%9F%E8%83%BD"><span class="toc-number">1.0.4.</span> <span class="toc-text">vim的额外功能</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/avatar/avatar.png" data-sizes="auto" alt="PPK" class="lazyload">
   <div class="sidebar-author-name">PPK</div>
   <div class="sidebar-description"></div>
@@ -401,8 +398,13 @@ Remix编译智能合约智能合约log_and_return.sol源码为
     </div>
   
 </div>
-
+</div>
       
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
       
     </div>
   </div>
@@ -460,7 +462,16 @@ Remix编译智能合约智能合约log_and_return.sol源码为
       <nav id="mobile-nav">
   <div class="sidebar-wrap">
     
-      <div class="sidebar-author">
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#vim%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">vim笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E6%8C%87%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.0.1.</span> <span class="toc-text">一般指令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.0.2.</span> <span class="toc-text">编辑模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%88%97%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.0.3.</span> <span class="toc-text">指令列命令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim%E7%9A%84%E9%A2%9D%E5%A4%96%E5%8A%9F%E8%83%BD"><span class="toc-number">1.0.4.</span> <span class="toc-text">vim的额外功能</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/avatar/avatar.png" data-sizes="auto" alt="PPK" class="lazyload">
   <div class="sidebar-author-name">PPK</div>
   <div class="sidebar-description"></div>
@@ -515,9 +526,14 @@ Remix编译智能合约智能合约log_and_return.sol源码为
     </div>
   
 </div>
-
+</div>
     
   </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
   
 </nav>
 

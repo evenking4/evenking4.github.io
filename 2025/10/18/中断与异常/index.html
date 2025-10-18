@@ -1,6 +1,6 @@
 
   <!DOCTYPE html>
-  <html  lang="en"  >
+  <html data-main-color="pink"  lang="en"  >
   <head>
   <meta charset="utf-8">
   
@@ -14,6 +14,7 @@
   
   
   <title>
+    中断与异常 |
     
     Hole
   </title>
@@ -32,13 +33,20 @@
 
   
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hole">
-<meta property="og:url" content="http://example.com/index.html">
+    <meta name="description" content="中断与异常概念梳理与分类日期: 2025.10.1 简介中断(Interrupt)和异常(Exception)是计算机中常见的概念，用于使计算机暂停正在执行的程序去处理某些外设请求或借助内核态进行一些用户态无法执行的特权操作。网上对中断和异常的解释与分类五花八门，各有各的说法。在查阅了许多资料、阅读了官方文档后，我终于理清楚了中间的关系，也知道了为什么网上各种博客会有偏差的原因。关键是因为市面上两">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中断与异常">
+<meta property="og:url" content="http://example.com/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/index.html">
 <meta property="og:site_name" content="Hole">
+<meta property="og:description" content="中断与异常概念梳理与分类日期: 2025.10.1 简介中断(Interrupt)和异常(Exception)是计算机中常见的概念，用于使计算机暂停正在执行的程序去处理某些外设请求或借助内核态进行一些用户态无法执行的特权操作。网上对中断和异常的解释与分类五花八门，各有各的说法。在查阅了许多资料、阅读了官方文档后，我终于理清楚了中间的关系，也知道了为什么网上各种博客会有偏差的原因。关键是因为市面上两">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/image-1.png">
+<meta property="og:image" content="http://example.com/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/image-2.png">
+<meta property="article:published_time" content="2025-10-18T14:07:53.000Z">
+<meta property="article:modified_time" content="2025-10-18T14:45:03.787Z">
 <meta property="article:author" content="PPK">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/image-1.png">
   
   
     <link rel="alternate" href="/atom.xml" title="Hole" type="application/atom+xml">
@@ -151,9 +159,7 @@
 </div>
 <header id="header">
   
-    
-      <img fetchpriority="high" src="/images/megumin.png" alt="">
-    
+    <img fetchpriority="high" src="/images/nanami-1.jpg" alt="中断与异常">
   
   <div id="header-outer">
     <div id="header-title">
@@ -161,7 +167,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">Hole</h1>
+            <h1 data-aos="slide-up">中断与异常</h1>
           </a>
         
       
@@ -177,176 +183,108 @@
 
         <div id="content">
           
-          <section id="main">
-  
-  
-  <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/" aria-label="中断与异常"></a>
-    
-    
-    <div class="post-cover-left">
+          <section id="main"><article id="post-中断与异常" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-10-18T14:07:53.000Z" itemprop="datePublished">2025-10-18</time>
+    <time style="display: none;" id="post-update-time">2025-10-18</time>
+  </a>
+</div>
+
       
-        <img data-src="/images/nanami-1.jpg" data-sizes="auto" alt="中断与异常" class="lazyload">
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="中断与异常概念梳理与分类"><a href="#中断与异常概念梳理与分类" class="headerlink" title="中断与异常概念梳理与分类"></a>中断与异常概念梳理与分类</h1><p>日期: 2025.10.1</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>中断(Interrupt)和异常(Exception)是计算机中常见的概念，用于使计算机暂停正在执行的程序去处理某些外设请求或借助内核态进行一些用户态无法执行的特权操作。网上对中断和异常的解释与分类五花八门，各有各的说法。在查阅了许多资料、阅读了官方文档后，我终于理清楚了中间的关系，也知道了为什么网上各种博客会有偏差的原因。关键是因为市面上两大主流的处理器：Intel和ARM的官方文档中对中断和异常的解释有所不同。</p>
+<h3 id="Intel处理器"><a href="#Intel处理器" class="headerlink" title="Intel处理器"></a>Intel处理器</h3><p>&emsp;&emsp;在Intel CPU手册Volume 1的6.4节中给出如下说明：<strong>处理器提供了两种中断程序的方法：中断和异常。中断是一种异步事件，通常由外设触发。异常是一种同步时间，是CPU在执行指令时检测到了反常条件，异常有三类：故障（faults）、陷阱（traps）和中止（aborts）</strong>。<br>&emsp;&emsp;中断和异常这两个机制主要在触发上有所不同，但二者最后都是让CPU收到一个中断号从而去执行对应的中断处理函数。还有一种特殊的方式可以给CPU一个中断号，那就是INT指令。例如INT 0x80就是给CPU一个0x80的中断号，而0x80的中断处理函数就是Linux提供的系统调用。<br>&emsp;&emsp;总结一下，IntelCPU共提供了三种方法用于中断程序：中断、异常以及INT指令，他们三个的最终目标都是给CPU一个中断号。<br><img src="/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/image-1.png" alt="alt text"></p>
+<p>&emsp;&emsp;网上还可以看见一些其他的区分，把INT n这种方法称为软件中断，因为这是软件程序主动触发的中断。而相应的中断和异常则被称为硬件中断。</p>
+<p>&emsp;&emsp;刚刚提到的都是硬中断，还有一种概念叫做软中断。这是一种由纯软件实现的可以做到和类似中断效果的机制。具体原理有一个单独的守护进程不断轮询一组标志位，如果哪个标志位有值了，则去调用该标志位对应的软中断处理函数。</p>
+<p>&emsp;&emsp;<strong>软中断是Linux处理一个中断的下半部分的主要方式</strong>。例如，如果网卡收到一个数据包，Linux系统首先会触发硬中断将数据包从网卡加载到内存中，而处理一个数据包的任务往往是比较耗时的，并且硬中断本身时难以打断的，如果在中断处理函数中花费了过多时间，则会大大降低CPU的时效性和效率，影响其他硬件的响应效率。而目前最佳的做法就是将中断处理分为上下两个部分，由硬中断执行简单基础的一些逻辑，而后续则交给一个软中断处理，这样就不会长时间占用CPU资源。<br><img src="/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/image-2.png" alt="alt text"></p>
+<h3 id="ARM处理器"><a href="#ARM处理器" class="headerlink" title="ARM处理器"></a>ARM处理器</h3><p>&emsp;&emsp;在ARM的官方文档的Exception Types一节中写到：<strong>Exceptions are conditions or system events that usually require remedial action or an update of system status by privileged software to ensure smooth functioning of the system.</strong><br>&emsp;&emsp;总之就是以异常（Exception）这一概念来概括中断程序执行去处理一些特殊情况或请求的机制。官方文档中将异常分为了<strong>同步异常（Synchronous exceptions）</strong>和<strong>异步异常（Asynchronous Exceptions）</strong>。<br>&emsp;&emsp;同步异常就类似于上文提到过的异常，是由当前正在执行的指令所引起的或与之相关的，同步异常于执行流式同步的，因为它只与当前执行的指令相关。产生同步异常有很多原因：</p>
+<ol>
+<li>无效指令与陷阱异常</li>
+<li>内存访问</li>
+<li>异常生成指令（类似于系统调用）</li>
+<li>调试异常</li>
+</ol>
+<p>&emsp;&emsp;异步异常往往是外部生成的，与上文提到的中断类似，用于使处理器响应外部的系统事件。下面是不同的异步中断：</p>
+<ol>
+<li>SError（System Error）<br>系统错误是内存系统为响应意外事件而生成的异常类型。我们预计不会发生这些事情，然如果他们确实已经发生了，我们必须得知道以做出补救措施。SError中断的例子包括：<ul>
+<li>已通过MMU的检查单在内存总线上遇到了错误的内存访问</li>
+<li>对某些RAM中的数据进行ECC校验时出现错误且无法修复</li>
+</ul>
+</li>
+<li>IRQ和FIQ<br>这两个异步异常类型都是由外部设备发起，如定时器的信号，按下一个键盘产生的信号。（注意：在老版的ARM架构中FIQ往往更高优先级被执行。而在AArch64中，FIQ和RIQ具有相同的优先级）<br>几乎所有情况下，都会有一个通用中断控制器（GIC）来管理IRQ和FIQ。GIC执行中断管理、优先级和路由等任务，为每一个中断提供一个信号到核心。</li>
+</ol>
+<p>&emsp;&emsp;上文提到的异步异常都是<strong>物理中断</strong>，在使用虚拟化的ARM系统中往往需要更加复杂的概念。ARM架构中为异常等级划分了四个层次：EL0（Application）、EL1（Rich OS）、EL2（Hypervisor）以及EL3（Firmware&#x2F;Secure Monitor）。</p>
+<p>&emsp;&emsp;Rich OS运行在由Hypervisor提供的虚拟环境，需要引入<strong>虚拟中断</strong>机制来触发Rich OS的中断。虚拟中断可以由EL2的软件生成，也可以由GIC生成。</p>
+
       
     </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-10-18</span>
-        <span><span class="icon-pencil"></span>1.4k words</span>
-        <span><span class="icon-clock"></span>5 mins</span>
-      </div>
-      <h2 class="post-title">中断与异常</h2>
-      <article class="post-article">
-        
-          中断与异常概念梳理与分类日期: 2025.10.1
-简介中断(Interrupt)和异常(Exception)是计算机中常见的概念，用于使计算机暂停正在执行的程序去处理某些外设请求或借助内核态进行一些用户态无法执行的特权操作。网上对中断和异常的解释与分类五花八门，各有各的说法。在查阅了许多资料、阅读了官方文档后，我终于理清楚了中间的关系，也知道了为什么网上各种博客会有偏差的原因。关键是因为市面上两大主流的处理器：Intel和ARM的官方文档中对中断和异常的解释有所不同。
-Intel处理器&amp;emsp;&amp;emsp;在Intel CPU手册Volume 1的6.4节中给出如下说明：处理器提供了两种中
-        
-      </article>
-    </div>
-  </div>
-  </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
 
-
+    </footer>
+  </div>
   
-  
-  <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
     
-    <a class="post-link" href="/2025/10/18/vim%E7%AC%94%E8%AE%B0/" aria-label="vim笔记"></a>
+  <nav id="article-nav" data-aos="fade-up">
     
-    <div class="post-cover-right">
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
       
         <img data-src="/images/koishi-1.png" data-sizes="auto" alt="vim笔记" class="lazyload">
       
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-10-18</span>
-        <span><span class="icon-pencil"></span>869 words</span>
-        <span><span class="icon-clock"></span>3 mins</span>
-      </div>
-      <h2 class="post-title">vim笔记</h2>
-      <article class="post-article">
+      <a href="/2025/10/18/vim%E7%AC%94%E8%AE%B0/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
         
-          vim笔记一般指令模式
-&amp;lt;Ctrl&amp;gt; + f：向下移动一页
-&amp;lt;Ctrl&amp;gt; + b：向上移动一页
-[n]&amp;lt;space&amp;gt;：光标移动n个字符
-0：移动到这一列开头
-$：移动到这一列最后一个字符
-G：移动到文件最后一列
-[n]G：移动到文件的第n列
-gg：移动到文件的第一列，相当于1G
-[n]&amp;lt;Enter&amp;gt;：光标向下移动n列
-&amp;#x2F;[word]：向下搜索第一个word的字串，按n继续搜索，按N反向搜索
-?[word]：向上搜索第一个word的字串，按n继续搜索，按N反向搜索
-:[n1],[n2]s&amp;#x2F;[word1]&amp;#x2F;[word2]
+          vim笔记
         
-      </article>
+      </h3>
     </div>
-  </div>
-  </div>
+    
+  </nav>
 
 
   
-  
-  <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/10/18/gdb%E7%AC%94%E8%AE%B0/" aria-label="gdb笔记"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        
-        
-          <img data-src="/images/megumin.png" data-sizes="auto" alt="gdb笔记" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-10-18</span>
-        <span><span class="icon-pencil"></span>732 words</span>
-        <span><span class="icon-clock"></span>2 mins</span>
-      </div>
-      <h2 class="post-title">gdb笔记</h2>
-      <article class="post-article">
-        
-          gdb笔记启动gdb
-编译带有调试信息的可执行文件，即在gcc的参数中加入-g参数：
-gcc -g -o main main.c
-
-启动gdb：
-gdb main
+</article>
 
 
-设置断点并运行程序
-可以用list &amp;lt;line_no&amp;gt;来显示准备设置断点附近行的代码。
-list还可以用函数名做参数，从而显示指定函数附近的代码。
 
-braek &amp;lt;line_no&amp;gt;可以在指定行号设置断点。
-disable breakpoint &amp;lt;line_no&amp;gt;可以取消指定断点。
-
-run命令可以启动程序，启动的程序会在遇到断点或错误时暂停运行。
-
-
-控制命令
-逐过程调试：n(next)执行下
-        
-      </article>
-    </div>
-  </div>
-  </div>
-
-
-  
-  
-  <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-    <a class="post-link" href="/2024/10/20/%E6%9C%AC%E5%9C%B0%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/" aria-label="本地智能合约部署测试"></a>
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/images/megumin.png" data-sizes="auto" alt="本地智能合约部署测试" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-10-20</span>
-        <span><span class="icon-pencil"></span>572 words</span>
-        <span><span class="icon-clock"></span>2 mins</span>
-      </div>
-      <h2 class="post-title">本地智能合约部署测试</h2>
-      <article class="post-article">
-        
-          使用Remix编译智能合约并用JS部署到Ganache并访问
-搭建环境安装npm和node，新建文件夹，在该目录下安装web3模块npm --registry http://registry.npm.taobao.org install web3然后输入npm init，并且一直按回车。注：web3版本过高可能导致后面部分函数报错，本次实验使用的web3版本为1.10.0
-
-Remix编译智能合约智能合约log_and_return.sol源码为
-12345678910111213141516171819202122232425262728293031323334353637383940414
-        
-      </article>
-    </div>
-  </div>
-  </div>
-
-
-  
 
 
 
 </section>
           
             <aside id="sidebar">
-  <div class="sidebar-wrapper ">
+  <div class="sidebar-wrapper wrap-sticky">
     <div class="sidebar-wrap" data-aos="fade-up">
       
-        <div class="sidebar-author">
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">中断与异常概念梳理与分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Intel%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">Intel处理器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARM%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">ARM处理器</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/avatar/avatar.png" data-sizes="auto" alt="PPK" class="lazyload">
   <div class="sidebar-author-name">PPK</div>
   <div class="sidebar-description"></div>
@@ -401,8 +339,13 @@ Remix编译智能合约智能合约log_and_return.sol源码为
     </div>
   
 </div>
-
+</div>
       
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
       
     </div>
   </div>
@@ -460,7 +403,16 @@ Remix编译智能合约智能合约log_and_return.sol源码为
       <nav id="mobile-nav">
   <div class="sidebar-wrap">
     
-      <div class="sidebar-author">
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">中断与异常概念梳理与分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Intel%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">Intel处理器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARM%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">ARM处理器</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/avatar/avatar.png" data-sizes="auto" alt="PPK" class="lazyload">
   <div class="sidebar-author-name">PPK</div>
   <div class="sidebar-description"></div>
@@ -515,9 +467,14 @@ Remix编译智能合约智能合约log_and_return.sol源码为
     </div>
   
 </div>
-
+</div>
     
   </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
   
 </nav>
 
