@@ -1,0 +1,884 @@
+
+  <!DOCTYPE html>
+  <html  lang="en"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <script>window.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
+  <title>
+    gti详解 |
+    
+    Hole
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+    <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="Git详解简介Git 是一个快速、可扩展的分布式版本控制系统，它拥有异常丰富的命令集，可以提供高级操作和对内部的完全访问。[2] 快速上手CheatSheet [1] 初始化创建一个文件夹作为git的项目目录 mkdir -p ~&#x2F;git-demo &amp;&amp; cd ~&#x2F;git-demo 初始化git仓库 git init 可以看到，这条命令在当前目录下创建了一个.git文件夹。该文件夹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gti详解">
+<meta property="og:url" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Hole">
+<meta property="og:description" content="Git详解简介Git 是一个快速、可扩展的分布式版本控制系统，它拥有异常丰富的命令集，可以提供高级操作和对内部的完全访问。[2] 快速上手CheatSheet [1] 初始化创建一个文件夹作为git的项目目录 mkdir -p ~&#x2F;git-demo &amp;&amp; cd ~&#x2F;git-demo 初始化git仓库 git init 可以看到，这条命令在当前目录下创建了一个.git文件夹。该文件夹">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/git.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024175714759.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024175931018.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024180114580.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024180956639.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024204844702.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024213039211.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/%E6%8F%90%E4%BA%A4%E6%A0%91.drawio.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024214820143.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024214942634.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024215307060.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024215927868.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024220909329.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024232307240.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024232906110.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024233333848.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025000022110.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025001836768.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025143116912.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026000635293.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026005150850.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026010806160.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026011105848.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026013827863.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025014815163.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025015238098.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025021347211.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025021828414.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025022134887.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026021437862.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026021827236.png">
+<meta property="og:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026022541164.png">
+<meta property="article:published_time" content="2025-10-25T19:16:17.000Z">
+<meta property="article:modified_time" content="2025-10-25T19:17:05.617Z">
+<meta property="article:author" content="PPK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/git.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Hole" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.0.1/dist/aos.css">
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff5252" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+         M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="#ff5252" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-magic"></div>
+        <a class="main-nav-link" data-main-color="red" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-magic"></div>
+        <a class="main-nav-link" data-main-color="green" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-magic"></div>
+        <a class="main-nav-link" data-main-color="red" href="/about">About</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-magic"></div>
+        <a class="main-nav-link" data-main-color="green" href="/friend">Friend</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-magic"></div>
+        <a class="main-nav-link" data-main-color="red" href="/test">Test</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/megumin.png" alt="gti详解">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">gti详解</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content">
+          
+          <section id="main"><article id="post-gti详解/gti详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-10-25T19:16:17.000Z" itemprop="datePublished">2025-10-26</time>
+    <time style="display: none;" id="post-update-time">2025-10-26</time>
+  </a>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="Git详解"><a href="#Git详解" class="headerlink" title="Git详解"></a>Git详解</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Git 是一个快速、可扩展的分布式版本控制系统，它拥有异常丰富的命令集，可以提供高级操作和对内部的完全访问。[2]</p>
+<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><h3 id="CheatSheet-1"><a href="#CheatSheet-1" class="headerlink" title="CheatSheet [1]"></a>CheatSheet [1]</h3><p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/git.png" alt="git"></p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>创建一个文件夹作为git的项目目录</p>
+<p><code>mkdir -p ~/git-demo &amp;&amp; cd ~/git-demo</code></p>
+<p>初始化git仓库</p>
+<p><code>git init</code></p>
+<p>可以看到，这条命令在当前目录下创建了一个.git文件夹。该文件夹记录了当前仓库的所有信息（在TODO一节中会详细解释）。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024175714759.png" alt="image-20251024175714759"></p>
+<h3 id="第一次提交"><a href="#第一次提交" class="headerlink" title="第一次提交"></a>第一次提交</h3><p>创建一个文件，并编辑一点内容</p>
+<p><code>echo &#39;11111&#39; &gt; 1.txt</code></p>
+<p>使用<code>git status</code>查看 git 仓库的状态：</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024175931018.png" alt="image-20251024175931018"></p>
+<p>可以看到，目前1.txt是处于<strong>未跟踪</strong>的状态。使用<code>git add 1.txt</code>将他加入<strong>暂存区</strong>：</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024180114580.png" alt="image-20251024180114580"></p>
+<p>修改1.txt文件的内容，再次<code>git status</code>可以看到1.txt的修改记录被移到了<strong>工作区</strong>（标红的部分）。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024180956639.png" alt="image-20251024180956639"></p>
+<p>输入<code>git commit -am &quot;First Commit&quot;</code>将代码提交到代码仓库。<code>git commit</code>原本只会提交<strong>暂存区</strong>的内容，<code>-a</code>参数可以自动将<strong>工作区</strong>的所有内容提交到<strong>暂存区</strong>再commit。-m参数后跟一个字符串表示提交信息。</p>
+<h3 id="工作区、暂存区-stage-与代码仓库"><a href="#工作区、暂存区-stage-与代码仓库" class="headerlink" title="工作区、暂存区(stage)与代码仓库"></a>工作区、暂存区(stage)与代码仓库</h3><p>在一个git项目中，一个数据对象（这里可以先理解成一个文件）可以有四种状态：未跟踪、在工作区、在暂存区、在代码仓库（这里不考虑贮藏区），如下图所示：</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024204844702.png" alt="image-20251024204844702"></p>
+<p>当一个文件被创建时，他首先会处于未被跟踪的状态。使用<code>git add &lt;file&gt;</code>可以将他加入暂存区，暂存区中保存所有新增文件、删除文件、修改文件的记录，使用<code>git commit</code>可以生成一个snapshot，将暂存区中的所有修改提交至代码仓库，形成一次提交。当修改已保存在代码仓库或暂存区的文件时，该文件会被转移至工作区，工作区保存所有内容发生过修改的文件。使用<code>git checkout -- &lt;file&gt;</code>可以丢弃工作区所有的修改，使用<code>git add &lt;file&gt;</code>可以将工作区的文件的修改保存至暂存区。而<code>git reset</code>可以将当前暂存区所有已保存的修改移回原有的状态，即工作区或未跟踪。（这里只是改变文件的状态，并不会把修改的内容撤回）</p>
+<p><strong>最佳的一个提交内的工作回滚实践：</strong></p>
+<p>如果你只想撤销工作区内某个文件的修改：<code>git checkout -- &lt;file&gt;</code>，同时，<code>git checkout -- .</code>可以撤销工作区内所有文件的修改。</p>
+<p>如果你想撤销整个暂存区和工作区内的修改，可以使用<code>git reset --hard </code>撤回。 </p>
+<h3 id="版本更新与代码回滚"><a href="#版本更新与代码回滚" class="headerlink" title="版本更新与代码回滚"></a>版本更新与代码回滚</h3><p>你的每一次<code>git commit</code>都会形成一个提交记录，也就是一个版本。可以使用<code>git log</code>查看历史提交记录。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024213039211.png" alt="image-20251024213039211"></p>
+<p>git保存了你每个版本中的所有代码，可以使用<code>git reset </code>在不同版本之间切换。其有三种提交模式，下表列出了三种模式的不同区别：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>提交</th>
+<th>暂存区</th>
+<th>工作区</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–soft</td>
+<td>回退</td>
+<td>保留</td>
+<td>保留</td>
+</tr>
+<tr>
+<td>–mixed（默认）</td>
+<td>回退</td>
+<td>清空</td>
+<td>保留</td>
+</tr>
+<tr>
+<td>–hard</td>
+<td>回退</td>
+<td>清空</td>
+<td>清空</td>
+</tr>
+</tbody></table>
+<p>这里做一个实验来测试这三者的区别，可以看到我上面<code>git log</code>的结果显示我有三次提交，每次第二第三次提交都分别增加了一个2.txt和3.txt。此时的提交树如图所示：</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/%E6%8F%90%E4%BA%A4%E6%A0%91.drawio.png" alt="提交树.drawio"></p>
+<p>输入<code>git reset --soft HEAD~2</code>（这里的HEAD~2，表示HEAD的父结点的父结点，即寻找父结点两次）。输入<code>git status</code>查看代码仓库状态：</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024214820143.png" alt="image-20251024214820143"></p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024214942634.png" alt="image-20251024214942634"></p>
+<p>可以看到此时前两次提交的修改都被移到了暂存区中，同时前两次提交记录也没有了。</p>
+<p>Tips：虽然<code>git log</code>中无法看到提交记录，但其实那两次commit依然存在，如果你能记得那两次提交的哈希值依然可以移动到那两次提交的版本</p>
+<p>重置刚刚的环境，输入<code>git reset --mixed HEAD~2</code></p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024215307060.png" alt="image-20251024215307060"></p>
+<p>可以看到修改依然保存，只不过是放在了工作区或未跟踪（因为这里我都是新增文件，所以回滚后都是未跟踪状态，如果是修改文件则会在工作区）。</p>
+<p>重置环境，输入<code>git reset --hard HEAD~2</code></p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024215927868.png" alt="image-20251024215927868"></p>
+<p>可以看到这次回滚不仅回滚了代码仓库的内容，并且还将版本之间的修改完全丢弃了。</p>
+<p>由此可以看出，之前我们用于丢弃工作区和暂存区的命令<code>git reset --hard HEAD</code>其本质是<strong>回滚到本次提交最开始的状态并丢弃工作区和暂存区的所有修改</strong>。</p>
+<p>刚刚我们使用的<code>git reset &lt;model&gt; &lt;id&gt;</code>中都的commit_id都是用相对引用的方式，如HEAD~2就是找HEAD指向的节点的父结点的父结点。我们还可以直接输入每个commit节点的id来移动到对应的commit节点。commit节点的id就是其哈希值，可以在<code>git log</code>中看到，我们不需要把哈希值全部输完，只要输入前4位且没有发生哈希碰撞，git就会自动帮我们匹配对应的节点。</p>
+<p>我们刚刚提到，被回退的提交节点虽然不会再出现在提交记录中了，但是我们依然可以用<code>git reset &lt;id&gt;</code>来找到。从之前的<code>git log</code>结果中可以看到第三次提交的节点的哈希值是040c…，这里我们输入<code>git reset --hard 040c</code></p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024220909329.png" alt="image-20251024220909329"></p>
+<p>可以看到，不仅移到了之前被回退的节点，删除的文件也返回了。</p>
+<h3 id="分支与合并"><a href="#分支与合并" class="headerlink" title="分支与合并"></a>分支与合并</h3><p>在git中，当你想要开发某个功能，或者基于某个现有的版本做一些新的尝试时，可以使用branch来开辟一条新的分支。</p>
+<p>顾名思义，branch就是在原有的提交树上开辟一条新的分叉，你可以在上面进行一些一些代码的修改提交而不影响原来的分支。git代码仓库初始会有一条main分支，我们可以用<code>git branch</code>（使用了默认的–list参数）来查看所有分支，使用<code>git branch &lt;name&gt;</code>来创建一个新的分支，使用<code>git switch &lt;name&gt;</code>来切换到另一个分支，下图展示了创建一个分支，并切换到其上的过程：</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024232307240.png" alt="image-20251024232307240"></p>
+<p>此时，我们在dev分支下创建一个新文件2.txt并提交，再切换到main分支上，可以看到刚刚创建2.txt不见了。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024232906110.png" alt="image-20251024232906110"></p>
+<p>我们再在main分支下创建新文件3.txt并提交，此时可以看到两个分支各持有2.txt和3.txt，并且<code>git log</code>的输出结果也只有在本分支下的提交记录。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251024233333848.png" alt="image-20251024233333848"></p>
+<p>当一个功能开发测试完毕想要合并到主分支上时，就需要使用到<code>git merge</code>来合并分支，合并分支时情况可能会遇到多种不同的情况，并采取不同的合并策略：</p>
+<ul>
+<li><p><strong>Fast-forwar merge</strong>（快进合并）</p>
+<p>这是最简单的一种合并情况，当一个分支是另一分支的祖先时，只需将落后的分支指向较新的分支即可完成合并，举个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A -- B -- C (master)</span><br><span class="line">           \</span><br><span class="line">            D -- E (feature)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>此时master分支为feature分支的祖先分支，因为master分支未进行任何提交，所以直接将master分支移至feature分支即可完成合并：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">A</span> <span class="operator">--</span> <span class="variable">B</span> <span class="operator">--</span> <span class="built_in">C</span> <span class="operator">--</span> <span class="built_in">D</span> <span class="operator">--</span> <span class="built_in">E</span> <span class="punctuation">(</span><span class="variable">master</span><span class="operator">,</span> <span class="variable">feature</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>3-way merge</strong></p>
+<p>当两个分支都拥有共同祖先但又都有各自新的代码提交时，就需要git产生一个新的合并提交，举个例子：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      <span class="built_in">D</span> <span class="operator">--</span> <span class="built_in">E</span> <span class="punctuation">(</span><span class="variable">feature</span><span class="punctuation">)</span></span><br><span class="line">     <span class="operator">/</span></span><br><span class="line"><span class="variable">A</span> <span class="operator">--</span> <span class="variable">B</span> <span class="operator">--</span> <span class="built_in">C</span> <span class="punctuation">(</span><span class="variable">master</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>图中feature和master都有共同的祖先节点B，但又各自又都有新的代码提交。此时若用<code>git merge</code>合并，git会首先找到他们共同的祖先节点B，然后对比B→C和B→E的提交，最终生成一个新的合并提交F。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      <span class="built_in">D</span> <span class="operator">--</span> <span class="built_in">E</span></span><br><span class="line">     <span class="operator">/</span>      \</span><br><span class="line"><span class="variable">A</span> <span class="operator">--</span> <span class="variable">B</span> <span class="operator">--</span> <span class="built_in">C</span> <span class="operator">--</span> <span class="variable">F</span> <span class="punctuation">(</span><span class="variable">master</span><span class="operator">,</span> <span class="variable">feature</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Conflict merge</strong>（冲突合并）</p>
+<p>当两个分支同时修改了同一文件的同一部分内容时，就会发生合并冲突。Git将会停止合并，并交由人工判断解决冲突。</p>
+<p>这里我们分别在main分支和dev分支中修改1.txt的第一行内容，提交后进行合并发生合并冲突。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025000022110.png" alt="image-20251025000022110"></p>
+<p>此时有两种选择，一是使用<code>git merge --abort</code>来撤销本次合并，二是修改发生冲突的文件，手动指定保存哪个版本的内容并再次提交，这里我们修改1.txt并选择保存main分支的版本并再次提交。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025001836768.png" alt="image-20251025001836768"></p>
+<p>Tips：还存在一种合并分支的命令<code>git rebase</code>，其可以将两条不同路径上的提交整理到一条路径上从而减少过多的提交节点，使得整体提交树变得更整洁。我们这里不做过多讨论。</p>
+</li>
+</ul>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h3><p>新建一个代码仓库，并进行一次提交</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/remote-demo</span><br><span class="line">cd ~/remote-demo</span><br><span class="line">git init</span><br><span class="line">touch 1.txt</span><br><span class="line">git add 1.txt</span><br><span class="line">git commit -am &quot;First Commit&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在github中新建一个仓库</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025143116912.png" alt="image-20251025143116912"></p>
+<p>在本地创建一个远程分支</p>
+<p><code>git remote add origin &lt;url&gt;</code></p>
+<p>这里的origin，可以理解为给远程仓库取了个别名。查看.git&#x2F;config的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">	url = https://github.com/evenking4/remote-demo.git</span><br><span class="line">	fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure>
+
+<p>这里可以看到，config中已为远程仓库origin建立了映射关系，但实际上并未真正推送远程分支。</p>
+<p>使用命令<code>git push -u origin main</code>将本地分支main推送至远程仓库origin，此时刷新github 代码仓库的页面可以看到仓库中已有1.txt。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026000635293.png" alt="image-20251026000635293"></p>
+<p>输入<code>git branch -a</code>可以看到，此时本地仓库也多了一条远程分支origin&#x2F;main</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% git branch -a</span><br><span class="line">* main</span><br><span class="line">  remotes/origin/main</span><br></pre></td></tr></table></figure>
+
+<p>对于本地仓库中的远程分支，其所代表的上一次与对应远程仓库同步（可能是推送也可能是拉取）时远程仓库对应分支的提交状态，并且远程分支是一个只读分支，我们无法切换到远程分支上进行提交等操作。</p>
+<p>我们在本地仓库中创建一个文件2.txt并提交，在github的远程仓库页面中创建一个文件3.txt。然后在本地仓库使用<code>git fecth origin</code>同步远程仓库的分支git 。此时远程分支同步了远程仓库新建3.txt的更新，而本地分支main则提交了新增2.txt的更新。</p>
+<p>输入命令<code>git log --graph --oneline --decorate --all</code>可以查看以图的形式查看提交记录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 739d84c (HEAD -&gt; main) Create 2.txt on main</span><br><span class="line">| * 60d7faa (origin/main) Create 3.txt</span><br><span class="line">|/  </span><br><span class="line">* 14264c2 First Commit</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，两个分支各进行了一次提交。我们输入<code>git merge origin/main</code>合并提交，此时，本地仓库中存在1.txt、2.txt、3.txt三个文件。</p>
+<p>Tips：<code>git pull</code>命令也可以拉取远程仓库的更新，其等价于<code>git fetch</code>+<code>git merge</code>。</p>
+<p>我们还可以将本地的修改推送至远程仓库，输入命令<code>git push -u origin main</code>，可以看到，远程仓库也多出了2.txt这一文件。</p>
+<p>但当推送本地分支时，要求当前分支完全超越远程仓库中的分支，即远程仓库中的对应分支的提交，本地要提交的分支必须都有。换句话说，远程分支要同步成本地分支只能使用fast-forwars合并的方式。</p>
+<p>这里我们在本地仓库创建文件4.txt并提交，在github远程仓库创建一个文件5.txt。此时，我们输入<code>git push -u origin main</code>进行提交会被远程分支拒绝</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026005150850.png" alt="image-20251026005150850"></p>
+<p>我们使用<code>git pull</code>同步远程仓库后再次推送即可同步成功。</p>
+<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>标签（tag）是git中一个非常实用的功能。对于某些比较重要的提交（例如一次大的版本更新），我们可以用<code>git tag &lt;tag_name&gt; &lt;commit_id&gt;</code>来为一次提交打标签，若未指定commit_id则会默认为当前所在的提交打上标签。</p>
+<p>输入<code>git tag v1.0</code>为当前提交打标签，然后还可以用<code>git tag</code>查看所有标签</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026010806160.png" alt="image-20251026010806160"></p>
+<p>进行一次新的提交对后，我们可以用<code>git checkout &lt;tag_name&gt;</code>来进入<strong>游离HEAD状态</strong>（detached HEAD），强制移动到某次特定提交上。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026011105848.png" alt="image-20251026011105848"></p>
+<h3 id="git-config"><a href="#git-config" class="headerlink" title="git config"></a>git config</h3><p>git的配置信息非常重要，其影响了git中许多的操作和提交时的一些附录信息。</p>
+<p>git的配置信息有三个层级：system（系统级）、global（用户级）、local（仓库级）。优先级为：local &gt; global &gt; system，影响范围则相反。</p>
+<p>system级的配置文件存储在&#x2F;etc&#x2F;gitconfig中，global级的配置文件存储在~&#x2F;.gitconfig中，local级的配置文件存储在.git&#x2F;config中。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026013827863.png" alt="image-20251026013827863"></p>
+<p>可以看到，git的config文件内部是一种I<strong>NI-like格式</strong>（类似于INI文件）</p>
+<p>我们可以使用类似于<code>git config core.bare</code>或<code>git config branch.main.remote</code>的形式来读取配置信息，常用命令如下</p>
+<ul>
+<li><p><strong>增</strong></p>
+<p><code>git config [&lt;scope&gt;] &lt;key&gt; &lt;value&gt;</code></p>
+</li>
+<li><p><strong>删</strong></p>
+<p><code>git config [&lt;scope&gt;] --unset &lt;key&gt;</code></p>
+</li>
+<li><p><strong>改</strong></p>
+<p><code>git config [&lt;scope&gt;] &lt;key&gt; &lt;value&gt;</code></p>
+</li>
+<li><p><strong>查</strong></p>
+<p><code>git config [&lt;scope&gt;] &lt;key&gt;</code></p>
+<p><code>git config --list</code>（查看当前应用的配置信息）</p>
+</li>
+</ul>
+<p>其中的[&lt;scope&gt;]可以是–local、–global和–system，默认是–local。</p>
+<p>git config中常用的配置信息如下：</p>
+<ul>
+<li>user.name与user.email：记录了当前使用作者的一些信息，会附加到每次的提交信息中，使得整个多人合作的项目可以溯源开发者。</li>
+<li>http.proxy与https.proxy：对于某些github上的代码仓库可能需要配置代理服务器才能访问，这里配置了http与https的代理服务器url。</li>
+<li>…</li>
+</ul>
+<h2 id="从-git看Git原理"><a href="#从-git看Git原理" class="headerlink" title="从.git看Git原理"></a>从.git看Git原理</h2><p>我在刚接触git时就很好奇，git是如何存储不同版本的所有代码的。如果只是把每个版本的所有的代码文件打个压缩包存起来，那得占多大空间。而且这也不利于各个版本之间复杂的比较与合并操作。</p>
+<p>学习理解git的底层原理，可以有助于加深对各种命令的记忆和理解。如果能像庖丁解牛一样看到一条命令就能大致知道他大致做了什么操作，大致有哪些存储的数据结构能支持他实现某些特性，那想必这本身就是一件很爽的事情。</p>
+<h3 id="git目录结构"><a href="#git目录结构" class="headerlink" title=".git目录结构"></a>.git目录结构</h3><p>新建一个git-demo文件夹，并初始化代码仓库</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/git-demo &amp;&amp; <span class="built_in">cd</span> ~/git-demo</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Tips：可以新开终端窗口并用<code>watch -n 0.5 tree .git</code>来动态实时查看.git的文件结构和其变化</p>
+<p>对于一个刚初始化的git仓库，其.git的文件结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">.git</span><br><span class="line">├── HEAD		# HEAD指针记录</span><br><span class="line">├── config	# 项目配置文件</span><br><span class="line">├── description		# 描述信息</span><br><span class="line">├── hooks		# hook脚本，激活后可以在某些git操作后自动执行的shell脚本</span><br><span class="line">│   ├── applypatch-msg.sample</span><br><span class="line">│   ├── commit-msg.sample</span><br><span class="line">│   ├── fsmonitor-watchman.sample</span><br><span class="line">│   ├── post-update.sample</span><br><span class="line">│   ├── pre-applypatch.sample</span><br><span class="line">│   ├── pre-commit.sample</span><br><span class="line">│   ├── pre-merge-commit.sample</span><br><span class="line">│   ├── pre-push.sample</span><br><span class="line">│   ├── pre-rebase.sample</span><br><span class="line">│   ├── pre-receive.sample</span><br><span class="line">│   ├── prepare-commit-msg.sample</span><br><span class="line">│   ├── push-to-checkout.sample</span><br><span class="line">│   └── update.sample</span><br><span class="line">├── info		# 本地仓库的一些局部配置信息</span><br><span class="line">│   └── exclude</span><br><span class="line">├── objects		# 存储所有git对象，重要！！！</span><br><span class="line">│   ├── info		# 存储一些辅助信息，不在讨论范围内</span><br><span class="line">│   └── pack		# 存储packfile，不在讨论范围内</span><br><span class="line">└── refs			# 存储所有节点引用</span><br><span class="line">    ├── heads		# 存储本地分支</span><br><span class="line">    └── tags		</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="git对象标识符"><a href="#git对象标识符" class="headerlink" title="git对象标识符"></a>git对象标识符</h3><p>git中主要有以下这几种对象（object）：</p>
+<ul>
+<li><p>blob</p>
+<p>blob（binary large object），用于存储文件内容的数据结构，其只保存文件的内容，不包含文件的文件名等信息，相同内容的文件会指向同一个blob。</p>
+</li>
+<li><p>tree</p>
+<p>tree约等于文件夹，其存储当前目录中所有{文件名&#x2F;目录ming→blob对象&#x2F;tree对象}的信息，以及文件与目录的权限信息。</p>
+</li>
+<li><p>commit</p>
+<p>commit表示一次提交。</p>
+</li>
+</ul>
+<p>我们先创建一个文件1.txt并将其加入暂存区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch 1.txt</span><br><span class="line">git add 1.txt</span><br></pre></td></tr></table></figure>
+
+<p>此时可以看到.git&#x2F;objects中多出了一个类似于哈希值的文件</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025014815163.png" alt="image-20251025014815163"></p>
+<p>这个e69de…的文件就是1.txt文件对应的blob对象。git中默认使用SHA-1算法来计算哈希值，对于一个文件要计算其blob对象的哈希值，计算方法公式是SHA1(blob &lt;文件长度&gt;\0&lt;文件内容&gt;)。</p>
+<p>这里我们验证一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -n &quot;blob 0\0&quot; | sha1sum</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025015238098.png" alt="image-20251025015238098"></p>
+<p>将1.txt的内容改成abcda后再加入暂存区后，出现了新的objects：</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025021347211.png" alt="image-20251025021347211"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">% </span><span class="language-bash"><span class="built_in">echo</span> -n <span class="string">&quot;blob 6\0abcda\n&quot;</span> | <span class="built_in">sha1sum</span></span></span><br><span class="line">5290c39f87ffee36518349c381219d54c7043c85  -</span><br></pre></td></tr></table></figure>
+
+<p>可以看到我们使用sha1算法计算出来的值和.git&#x2F;objects中的哈希值完全匹配。</p>
+<p>我们可以用<code>git cat -p &lt;obj_id&gt;</code>来查看一个objects的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">% </span><span class="language-bash">git cat-file -p 5290</span></span><br><span class="line">abcda</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们进行一次提交</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -am &quot;First Commit&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025021828414.png" alt="image-20251025021828414"></p>
+<p>可以看到又多出了两个对象，使用<code>git cat-file</code>查看其内容</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251025022134887.png" alt="image-20251025022134887"></p>
+<p>显而易见，c27b是tree，其包含了目录中的所有目录项及其相关信息，527c是commit，其包含了本次提交的一些提交信息，以及所对应的tree的哈希值。</p>
+<p>这里我们再创建一个2.txt，内容和1.txt一模一样。并且创建一个目录3.d并在3.d中创建文件3.txt，内容为ccccc，并再次提交。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp 1.txt 2.txt</span><br><span class="line">mkdir 3.d</span><br><span class="line">echo ccccc &gt; 3.d/3.txt</span><br><span class="line">git add .</span><br><span class="line">git commit -am &quot;Second Commit&quot;</span><br></pre></td></tr></table></figure>
+
+<p>我们看第二次提交的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">% </span><span class="language-bash">git cat-file -p 9023</span></span><br><span class="line">tree 06d11646cb0696fd40211b68360f63a53259245b</span><br><span class="line">parent 527c284187c3bce4786556965bdf4772fda56c6e</span><br><span class="line">author ppk &lt;2770852375@qq.com&gt; 1761330812 +0800</span><br><span class="line">committer ppk &lt;2770852375@qq.com&gt; 1761330812 +0800</span><br><span class="line"></span><br><span class="line">Second Commit</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这次提交还记录了其父结点的哈希值</p>
+<p>查看第二次提交对应的tree的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">% </span><span class="language-bash">git cat-file -p 06d1</span></span><br><span class="line">100644 blob 5290c39f87ffee36518349c381219d54c7043c85	1.txt</span><br><span class="line">100644 blob 5290c39f87ffee36518349c381219d54c7043c85	2.txt</span><br><span class="line">040000 tree e845d214d1154d22f96dedf0c06bdf377e1ed4dc	3.d</span><br></pre></td></tr></table></figure>
+
+<p>可以看到1.txt和2.txt虽然文件名不同，但是因为文件内容相同，所以都指向同一个blob对象。由此可见，一个commit就是通过这样索引的方式来保存整个当前版本的代码，又因为其保存了父节点的哈希值，所以可以实现版本控制与代码回滚。</p>
+<p>最后总结一下</p>
+<ul>
+<li>一个文件对应一个blob对象，文件内容相同的文件都指向同一个blob对象，无论文件名是否相同。</li>
+<li>一个目录会对应一个tree对象，tree对象中的保存了许多目录项，一个目录项可代表一个blob对象或tree对象，一个目录项包含了该对象的访问权限、类型、哈希值、名称信息。存在一个隐式的tree对象作为整个项目的根目录。</li>
+<li>一次提交对应一个commit对象，commit对象中包含了本次提交的注解、作者、提交者的信息。每一个commit对应一个作为根目录的tree对象。除了第一个commit，所有commit还会记录其父结点的哈希值，如果是个合并提交，则会包含所有父结点的哈希值。</li>
+</ul>
+<h3 id="HEAD与refs"><a href="#HEAD与refs" class="headerlink" title="HEAD与refs"></a>HEAD与refs</h3><p>git项目中永远存在一个头指针HEAD指向当前所处在的提交（不考虑第一次提交前）。查看.git&#x2F;HEAD中的内容可以看到其保存了当前所在分支的路径。</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026021437862.png" alt="image-20251026021437862"></p>
+<p>refs文件夹中主要有三个文件夹：heads（存储了所有本地分支）、remotes（存储了所有远程分支）、tags（存储了所有标签）。查看这些文件所保存的内容：</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026021827236.png" alt="image-20251026021827236"></p>
+<p>可以看到他们只是简单保存了指向节点的哈希值。所以在git中创建一个分支的成本非常小，他不会像SVN那样每个分支都会创建一个chunk来保存大量代码，他只是创建了一个指针指向当前提交，并且这个指针会随着每次提交而不断移动。</p>
+<p>值得一提的是，HEAD可以处于一种特殊的分离模式，当强制将HEAD移到某个没有任何分支指向的节点时，HEAD就会处于游离状态。</p>
+<p>这里我用<code>git checkout &lt;commit_id&gt;</code>将HEAD移到之前的节点，然后查看.git&#x2F;HEAD：</p>
+<p><img src="/2025/10/26/gti%E8%AF%A6%E8%A7%A3/gti%E8%AF%A6%E8%A7%A3/image-20251026022541164.png" alt="image-20251026022541164"></p>
+<p>可以看到此时HEAD中不在指向refs中的某个分支，而是直接存储对应节点的id。</p>
+<p>游离HEAD状态下也可以进行代码的修改和提交，但这本身是一种很危险的状态，后续如果找不到对应的commit_id将无法返回，并且因为没有绑定branch和tag，也可能会被git的垃圾回收机制清除。</p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><ul>
+<li>一个可视化的git分支训练沙盒，并设置了许多教学关卡：<a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">https://learngitbranching.js.org/?locale=zh_CN</a></li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>[1] b站视频:<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ni4y1t7jK">https://www.bilibili.com/video/BV1ni4y1t7jK</a></p>
+<p>[2] git官方文档:<a target="_blank" rel="noopener" href="https://git-scm.com/docs">https://git-scm.com/docs</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" data-aos="fade-up">
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="/images/nanami-1.jpg" data-sizes="auto" alt="中断与异常" class="lazyload">
+      
+      <a href="/2025/10/18/%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          中断与异常
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">Git详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="toc-number">1.2.</span> <span class="toc-text">快速上手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CheatSheet-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">CheatSheet [1]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.2.2.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4"><span class="toc-number">1.2.3.</span> <span class="toc-text">第一次提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8C%BA%E3%80%81%E6%9A%82%E5%AD%98%E5%8C%BA-stage-%E4%B8%8E%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93"><span class="toc-number">1.2.4.</span> <span class="toc-text">工作区、暂存区(stage)与代码仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A"><span class="toc-number">1.2.5.</span> <span class="toc-text">版本更新与代码回滚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E4%B8%8E%E5%90%88%E5%B9%B6"><span class="toc-number">1.2.6.</span> <span class="toc-text">分支与合并</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">1.3.</span> <span class="toc-text">进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF"><span class="toc-number">1.3.1.</span> <span class="toc-text">远程分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tag"><span class="toc-number">1.3.2.</span> <span class="toc-text">tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-config"><span class="toc-number">1.3.3.</span> <span class="toc-text">git config</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E-git%E7%9C%8BGit%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.</span> <span class="toc-text">从.git看Git原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.1.</span> <span class="toc-text">.git目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E5%AF%B9%E8%B1%A1%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-number">1.4.2.</span> <span class="toc-text">git对象标识符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HEAD%E4%B8%8Erefs"><span class="toc-number">1.4.3.</span> <span class="toc-text">HEAD与refs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.5.</span> <span class="toc-text">最佳实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">1.6.</span> <span class="toc-text">引用</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.png" data-sizes="auto" alt="PPK" class="lazyload">
+  <div class="sidebar-author-name">PPK</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="red" href="/" aria-label="Home"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="green" href="/archives" aria-label="Archives"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="red" href="/about" aria-label="About"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="green" href="/friend" aria-label="Friend"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="red" href="/test" aria-label="Test"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">Test</div>
+    </div>
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep"></span>
+      PPK
+    </div>
+    
+      <div>
+        Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        8.9k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        00:32
+      </div>
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/icon/magic.png" height="50" width="50" alt="backtop" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">Git详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="toc-number">1.2.</span> <span class="toc-text">快速上手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CheatSheet-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">CheatSheet [1]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.2.2.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4"><span class="toc-number">1.2.3.</span> <span class="toc-text">第一次提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8C%BA%E3%80%81%E6%9A%82%E5%AD%98%E5%8C%BA-stage-%E4%B8%8E%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93"><span class="toc-number">1.2.4.</span> <span class="toc-text">工作区、暂存区(stage)与代码仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A"><span class="toc-number">1.2.5.</span> <span class="toc-text">版本更新与代码回滚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E4%B8%8E%E5%90%88%E5%B9%B6"><span class="toc-number">1.2.6.</span> <span class="toc-text">分支与合并</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">1.3.</span> <span class="toc-text">进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF"><span class="toc-number">1.3.1.</span> <span class="toc-text">远程分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tag"><span class="toc-number">1.3.2.</span> <span class="toc-text">tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-config"><span class="toc-number">1.3.3.</span> <span class="toc-text">git config</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E-git%E7%9C%8BGit%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.</span> <span class="toc-text">从.git看Git原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.1.</span> <span class="toc-text">.git目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E5%AF%B9%E8%B1%A1%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-number">1.4.2.</span> <span class="toc-text">git对象标识符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HEAD%E4%B8%8Erefs"><span class="toc-number">1.4.3.</span> <span class="toc-text">HEAD与refs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.5.</span> <span class="toc-text">最佳实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">1.6.</span> <span class="toc-text">引用</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.png" data-sizes="auto" alt="PPK" class="lazyload">
+  <div class="sidebar-author-name">PPK</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="red" href="/" aria-label="Home"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="green" href="/archives" aria-label="Archives"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="red" href="/about" aria-label="About"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="green" href="/friend" aria-label="Friend"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" data-main-color="red" href="/test" aria-label="Test"></a>
+      <div class="sidebar-menu-icon icon-magic"></div>
+      <div class="sidebar-menu-link">Test</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+<script type="module" data-pjax>
+  import PhotoSwipeLightbox from "https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js";
+  
+  const pswp = () => {
+    if (_$$('.article-entry a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-entry',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-gallery',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    window.lightboxStatus = 'done';
+    window.removeEventListener('lightbox:ready', pswp);
+  }
+  if(window.lightboxStatus === 'ready') {
+    pswp()
+  } else {
+    window.addEventListener('lightbox:ready', pswp);
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js"></script>
+
+  <script data-pjax>
+    quicklink.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
+
+
+<div id="lazy-script">
+  <div>
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.3.0-alpha.1' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+
